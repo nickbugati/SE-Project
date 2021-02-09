@@ -10,5 +10,6 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
+            - run: npm install -g mocha
             - run: npm install
       - run: npm run test
