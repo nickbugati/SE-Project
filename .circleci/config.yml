@@ -13,6 +13,9 @@ jobs:
             - run: npm install mocha
             - run: alias mocha='./node_modules/.bin/_mocha'
             - run: npm install
-      - run: npm start &
+      - run: 
+        name: Background Server
+        command: npm start
+        background: true
       - run: sleep 5
       - run: npm run test
