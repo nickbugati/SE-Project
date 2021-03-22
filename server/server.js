@@ -1,5 +1,4 @@
 const express = require('./config/express.js');
-//const express = require('express');
 
 require('dotenv').config();
 const { auth, requiresAuth } = require('express-openid-connect');
@@ -8,7 +7,6 @@ const { auth, requiresAuth } = require('express-openid-connect');
 const port = process.env.PORT || 3000;
 
 const app = express.init();
-//const app = express();
 
 app.use(
   auth({
