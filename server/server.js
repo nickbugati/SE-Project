@@ -7,6 +7,7 @@ const { auth, requiresAuth } = require('express-openid-connect');
 const port = process.env.PORT || 3000;
 
 const app = express.init();
+app.use('/officer', require('./controllers/officerRouter'));
 
 app.use(
   auth({
