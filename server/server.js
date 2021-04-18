@@ -127,7 +127,7 @@ app.get('/', (req, res) => {
 
   if (req.oidc.isAuthenticated()) {
     res.redirect('/admin/');
-  } else { res.send('Do not have permission'); }
+  } else { res.redirect('/home/'); }
 
 });
 
