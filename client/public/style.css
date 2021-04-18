@@ -1,0 +1,151 @@
+
+img {
+ display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+
+}
+
+body {
+
+
+font-family: Arial, Helvetica, sans-serif, sans-serif;
+background-color:#F5F5F5;
+text-align: center;
+  
+}
+
+.main {
+  
+margin-top: 180px;
+
+
+}
+
+
+
+.main a {
+
+
+text-align: center;
+
+}
+
+
+#donutchart {display:inline-block;margin-right:10px; width:200px;} 
+
+
+#iframe {display:inline-block;margin-right:10px; width:200px; 
+padding-right: 50px;} 
+#log {float:left } 
+
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%;
+  left: 0; 
+ z-index:1; 
+
+}
+
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  
+}
+
+
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+
+.container {
+margin: auto;
+  width: 50%;
+  padding: 10px;
+
+margin-top: 180px;
+}
+
+
+form {
+margin: auto;
+  width: 50%;
+  padding: 10px;
+
+}
+
+.cap{
+display:inline-block;margin-right:10px; width:200px;
+
+
+
+}
+
+
+
+label {
+    display: block;
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+input,
+label {
+    margin: .4rem 0;
+}
+
+
+nav ul{height:100px; width:35%;
+ display: block;
+  margin-left: auto;
+  margin-right: auto;}
+nav ul{overflow:hidden; 
+ overflow: -moz-scrollbars-vertical; 
+overflow-y:scroll;
+ border: 1px solid black;
+  list-style-position: inside;
+  background-color: white;}
+  ul li{
+  margin-left: 0; padding-left: 0;
+  text-align: left;
+  
+  }

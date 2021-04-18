@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>WECE MG</title>
+    <link href="style.css" rel="stylesheet" />
+    <script type="module" src="calendar.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="management.js"> </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
+
+    <script>
+
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+       // document.getElementById('start').setValue = today;
+       // document.getElementById('start').setMin = today;
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var occ, cap;
+            $("#submit").click(function () {
+                occ = $('input[name="occ"]').val();
+                cap = $('input[name="capp"]').val();
+                $.post("http://localhost:3000/numChange", { occ: occ, cap: cap }, function (data) {
+                    if (data === 'yes') {
+                        alert("Capacity Altered");
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var announ;
+            $("#post").click(function () {
+                announ = $("#announ").val();
+                console.log(announ);
+                $.post("http://localhost:3000/announcement", { ann: announ }, function (data) {
+                    if (data === 'yes') {
+                        alert("Announcement Posted");
+                    }
+                });
+            });
+        });
+    </script>
+
+
+    <script>
+        
+
+    </script>
+
+<script>
+
+    $(document).ready(function () {
+        var officer;
+        $("#officer_post").click(function () {
+            officer = $("#officer").val();
+            console.log(officer);
+            $.post("http://localhost:3000/officer", { officer: officer }, function (data) {
+                if (data) {
+                    addOption(officer);
+                    alert("Officer Added");
+                }
+            });
+        });
+    });
+</script>
+<script>
+    var officers = [];
+    
+    $(document).ready(function() { 
+        $.ajax({
+            url: '/officer',
+            method: 'GET',
+        }).done(function(data){
+            officers = data;
+            console.log(data);
+            var newOption;
+            officers.forEach(element => {
+                addOption(element.name);
+            });
+        });    
+    });
+    
+    $(document).ready(function () {
+
+        var d_officer;
+        var officerId;
+        $("#officer_delete").click(function () {
+            d_officer = $("#d_officer").val();
+
+            officers.forEach(element => {
+                if (d_officer == element.name)
+                    officerId = element._id;
+            });
+
+            $.ajax({
+                url: 'http://localhost:3000/officer',
+                type: 'DELETE',
+                data: {id: officerId},
+            }).done(function() {
+                alert("Officer Removed");
+                location.reload();
+            }).fail(function() {
+                alert("Officer not found");
+            });
+        });
+    });
+
+    
+
+
+    $(document).ready(function () {
+            var suprv;
+            $("#input").on('change', function () {
+                suprv = $("#input").val();
+                console.log(suprv);
+                $.post("http://localhost:3000/supervisor", { suprv: suprv }, function (data) {
+                    if (data === 'yes') {
+                        alert("Current Supervisor Updated");
+                    }
+                });
+            });
+        });
+
+
+        $(document).ready(function () {
+            $.get("/current", function (data) {
+
+                $("#currSup").html(data.suprv);
+                console.log(data.suprv);
+
+            });
+
+        });
+
+
+        
+
+</script>
+
+
+
+
+</head>
+
+
+
+<body>
+
+
+
+
+
+    <div class="topnav">
+
+        <img src="logo.png">
+
+        <a  href="/home/">Availability</a>
+        <a href="/location/">Location</a>
+        <a href="#about">About</a>
+        <a class="active" id="login" href="/login">Admin Login</a>
+    </div>
+
+
+
+    <div class="main">
+
+        <label for="add_officer">Add officer: </label>
+
+        <textarea id="officer" name="officer" rows="1" cols="50"> </textarea>
+        <br>
+        <button type="button" id="officer_post" style="width:100px;height:30px"> Post </button>
+
+
+        <br>
+        <label for="delete_officer">Remove officer: </label>
+
+        <textarea id="d_officer" name="d_officer" rows="1" cols="50"> </textarea>
+        <br>
+        <button type="button" id="officer_delete" style="width:100px;height:30px"> Post </button>
+
+
+        <br>
+        <a>Current Supervisor: </a>
+        <a id="currSup"> </a>
+        <br>
+
+        <form></form>
+
+        <label for="input">Select Current Supervisor:</label>
+        <select name="input" id="input" onchange="setSupervisor()">
+            <option id="blank" value=""> </option>
+        </select>
+
+        <br>
+        <div class="cap">
+            <a>Input Occupancy</a>
+            <form>
+                <table cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td rowspan="2"><input type="number" name="occ" id="occ" value="3" onchange="setOcc()"
+                                style="width:100px;height:45px;font-weight:bold;" /></td>
+                        <td><input type="button" value=" /\ " onclick="this.form.occ.value++; setOcc();"
+                                style="font-size:15px;margin:0;padding:0;width:50px;height:20px;"></td>
+                    </tr>
+                    <tr>
+                        <td><input type=button value=" \/ " onclick="this.form.occ.value--; setOcc();"
+                                style="font-size:15px;margin:0;padding:0;width:50px;height:20px;"></td>
+                    </tr>
+                </table>
+            </form>
+
+
+            <a>Input Capacity</a>
+            <form>
+                <table cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td rowspan="2"><input type="number" onchange="setCap()" name="capp" id="cap" value="10"
+                                style="width:100px;height:45px;font-weight:bold;" /></td>
+                        <td><input type="button" value=" /\ " onclick="this.form.capp.value++; setCap();"
+                                style="font-size:15px;margin:0;padding:0;width:50px;height:20px;"></td>
+                    </tr>
+                    <tr>
+                        <td><input type=button value=" \/ " onclick="this.form.capp.value--; setCap();"
+                                style="font-size:15px;margin:0;padding:0;width:50px;height:20px;"></td>
+                    </tr>
+                </table>
+            </form>
+
+        </div>
+
+        <input type="button" id="submit" value="Submit Capacity Change">
+
+
+        <label for="meeting-time">Make a new Announcment:</label>
+
+        <textarea id="announ" name="announ" rows="10" cols="50"> </textarea>
+        <br>
+        <button type="button" id="post" style="width:100px;height:30px"> Post </button>
+
+
+        <label for="meeting-time">Choose a Date for new office hour window:</label>
+
+
+        <input type="date" id="start" name="trip-start" value="2021-03-24" min="2021-03-24" max="2030-12-21">
+
+
+        <button id="authorize_button" style="display: none;">Authorize Google</button>
+        <button id="signout_button" style="display: none;">Sign Out</button>
+
+
+
+        <label for="meeting-time">Choose a Date for new office hour window:</label>
+
+
+        <input type="date" id="start" name="start" min="2021-04-14" max="2030-12-21">
+
+
+        <label for="appt">Choose start time:</label>
+
+        <input type="time" id="appt" name="appt" min="09:00" max="18:00" required>
+
+
+        <label for="appt">Choose end time:</label>
+
+        <input type="time" id="appt2" name="appt2" min="09:00" max="18:00" required>
+
+        <input onclick="insertEvent();" type="button" id="event" value="Create Event">
+
+        <pre id="content" style="white-space: pre-wrap;"></pre>
+
+
+
+
+
+
+    </div>
+
+    <pre id="content" style="white-space: pre-wrap;"></pre>
+
+    <script>
+        // Client ID and API key from the Developer Console
+        var CLIENT_ID = '616743619584-3h98jni1hrj5apls3fcmi0k5a7oa51cd.apps.googleusercontent.com';
+        var API_KEY = 'AIzaSyDcf8lIXUYPVsxT71ZjvdV-1yKypwZ4x4Q';
+
+        // Array of API discovery doc URLs for APIs used by the quickstart
+        var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+
+        // Authorization scopes required by the API; multiple scopes can be
+        // included, separated by spaces.
+        var SCOPES = "https://www.googleapis.com/auth/calendar";
+
+        var authorizeButton = document.getElementById('authorize_button');
+        var signoutButton = document.getElementById('signout_button');
+
+        /**
+         *  On load, called to load the auth2 library and API client library.
+         */
+        function handleClientLoad() {
+            gapi.load('client:auth2', initClient);
+        }
+
+        /**
+         *  Initializes the API client library and sets up sign-in state
+         *  listeners.
+         */
+        function initClient() {
+            gapi.client.init({
+                apiKey: API_KEY,
+                clientId: CLIENT_ID,
+                discoveryDocs: DISCOVERY_DOCS,
+                scope: SCOPES
+            }).then(function () {
+                // Listen for sign-in state changes.
+                //    gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+                // Handle the initial sign-in state.
+                //  updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+                //  authorizeButton.onclick = handleAuthClick;
+                //  signoutButton.onclick = handleSignoutClick;
+            }, function (error) {
+                appendPre(JSON.stringify(error, null, 2));
+            });
+        }
+
+        function appendPre(message) {
+            var pre = document.getElementById('content');
+            var textContent = document.createTextNode(message + '\n');
+            pre.appendChild(textContent);
+        }
+
+
+        function insertEvent() {
+
+
+            gapi.auth2.getAuthInstance().signIn().then(function () {
+                console.log(document.getElementById('start').value);
+                console.log(document.getElementById('appt2').value);
+
+
+                var event = {
+
+
+                    'summary': 'WECE Office Hours.',
+                    'location': '1064 Center Dr, Gainesville, FL 32611',
+                    'description': 'WECE Office Hours.',
+                    'start': {
+                        // 'dateTime': '2015-05-28T09:00:00-07:00',
+                        'dateTime': document.getElementById('start').value + 'T' + document.getElementById('appt').value + ':00',
+                        'timeZone': 'America/New_York'
+                    },
+                    'end': {
+                        //'dateTime': '2015-05-28T17:00:00-07:00',
+                        'dateTime': document.getElementById('start').value + 'T' + document.getElementById('appt2').value + ':00',
+                        'timeZone': 'America/New_York'
+                    }
+
+
+                };
+
+                var request = gapi.client.calendar.events.insert({
+                    'calendarId': 'eqfb22b5mdhco2ur2f3esjf56k@group.calendar.google.com',
+                    'resource': event
+                });
+
+                request.execute(function (event) {
+
+                    alert("Event created: " + event.htmlLink);
+                });
+
+
+
+
+
+            })
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+    </script>
+
+
+    <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()"
+        onreadystatechange="if (this.readyState === 'complete') this.onload()">
+        </script>
+
+
+
+
+
+
+    </div>
+
+
+
+
+    <script>
+        getSupervisor()
+
+    </script>
+
+</body>
+
+</html>

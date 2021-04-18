@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <title>WECE MG</title>
+    <link href="style.css" rel="stylesheet" />
+    <script src="management.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
+    <script>
+        $(document).ready(function () {
+            $.get("/num", function (data) {
+                $("#cap").html(data.cap);
+                $("#occ").html(data.occ);
+                console.log(data.occ);
+                console.log(data.cap);
+
+            });
+        });
+        $(document).ready(function () {
+            $.get("/announ", function (data) {
+
+                jQuery.each(data.anns, (index, item) => {
+                    $("ul").prepend($("<li>").html(item));
+                    console.log(item);
+
+                });
+
+            });
+
+        });
+        $(document).ready(function () {
+            $.get("/current", function (data) {
+
+                $("#currSup").html(data.suprv);
+                console.log(data.suprv);
+
+            });
+
+        });
+
+
+    </script>
+
+
+
+
+    <script>
+        google.charts.load("current", { packages: ["corechart"] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+
+
+            var data = google.visualization.arrayToDataTable([
+                ['Type', 'Occupancy'],
+                ['Available', Number(document.getElementById("cap").innerHTML - document.getElementById("occ").innerHTML)],
+                ['Unavailable', Number(document.getElementById("occ").innerHTML)]
+
+            ]);
+
+            var options = {
+                title: 'Current Spots Available: ' + Number(document.getElementById("cap").innerHTML - document.getElementById("occ").innerHTML),
+                pieHole: 0.5,
+                legend: 'none',
+                pieSliceText: 'value',
+                backgroundColor: '#F5F5F5',
+                colors: ['blue', 'grey']
+
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+            chart.draw(data, options);
+
+
+        }
+
+    </script>
+
+
+
+
+
+</head>
+
+
+
+<body>
+
+    <div class="topnav">
+
+        <img src="logo.png">
+
+        <a class="active" href="/home/">Availability</a>
+        <a href="/location/">Location</a>
+        <a href="#about">About</a>
+        <a id="login" href="/login">Admin Login</a>
+    </div>
+
+
+
+
+    <div class="main">
+        <div hidden id="occ" value="">
+        </div>
+        <div hidden id="cap" value="">
+        </div>
+        <h3>Current Supervisor: </h3>
+        <a id="currSup"></a>
+        <br>
+        <br>
+
+        <br>
+
+        <div id="donutchart" style="width: 400px; height: 400px;"></div>
+
+
+        <iframe
+            src="https://calendar.google.com/calendar/embed?height=500&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=America%2FNew_York&amp;src=ZXFmYjIyYjVtZGhjbzJ1cjJmM2VzamY1NmtAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;
+        src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%23E67C73&amp;color=%230B8043&amp;mode=WEEK&amp;showTitle=0&amp;showTz=0&amp;showPrint=0"
+            style="border:solid 1px #777" width="500" height="500" frameborder="0" scrolling="no"></iframe>
+        <h1>Announcements</h1>
+        <nav>
+            <ul>
+                <li>Announcements Added here </li>
+
+            </ul>
+        </nav>
+
+    </div>
+
+
+
+
+
+
+
+
+</body>
+
+</html>
