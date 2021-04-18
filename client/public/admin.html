@@ -29,7 +29,7 @@
             $("#submit").click(function () {
                 occ = $('input[name="occ"]').val();
                 cap = $('input[name="capp"]').val();
-                $.post("http://localhost:3000/numChange", { occ: occ, cap: cap }, function (data) {
+                $.post("https://wece-makers-garage-management.herokuapp.com/numChange", { occ: occ, cap: cap }, function (data) {
                     if (data === 'yes') {
                         alert("Capacity Altered");
                     }
@@ -44,7 +44,7 @@
             $("#post").click(function () {
                 announ = $("#announ").val();
                 console.log(announ);
-                $.post("http://localhost:3000/announcement", { ann: announ }, function (data) {
+                $.post("https://wece-makers-garage-management.herokuapp.com/announcement", { ann: announ }, function (data) {
                     if (data === 'yes') {
                         alert("Announcement Posted");
                     }
@@ -66,7 +66,7 @@
         $("#officer_post").click(function () {
             officer = $("#officer").val();
             console.log(officer);
-            $.post("http://localhost:3000/officer", { officer: officer }, function (data) {
+            $.post("https://wece-makers-garage-management.herokuapp.com/officer", { officer: officer }, function (data) {
                 if (data) {
                     addOption(officer);
                     alert("Officer Added");
@@ -105,7 +105,7 @@
             });
 
             $.ajax({
-                url: 'http://localhost:3000/officer',
+                url: 'https://wece-makers-garage-management.herokuapp.com/officer',
                 type: 'DELETE',
                 data: {id: officerId},
             }).done(function() {
@@ -125,7 +125,7 @@
             $("#input").on('change', function () {
                 suprv = $("#input").val();
                 console.log(suprv);
-                $.post("http://localhost:3000/supervisor", { suprv: suprv }, function (data) {
+                $.post("https://wece-makers-garage-management.herokuapp.com/supervisor", { suprv: suprv }, function (data) {
                     if (data === 'yes') {
                         alert("Current Supervisor Updated");
                     }
@@ -248,12 +248,6 @@
         <textarea id="announ" name="announ" rows="10" cols="50"> </textarea>
         <br>
         <button type="button" id="post" style="width:100px;height:30px"> Post </button>
-
-
-        <label for="meeting-time">Choose a Date for new office hour window:</label>
-
-
-        <input type="date" id="start" name="trip-start" value="2021-03-24" min="2021-03-24" max="2030-12-21">
 
 
         <button id="authorize_button" style="display: none;">Authorize Google</button>
