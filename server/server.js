@@ -114,9 +114,9 @@ app.get('/num', function (req, res, next) {
   res.json({ occ: occ, cap: cap });
 })
 
-app.get('/announ', function (req, res, next) {
+/*app.get('/announ', function (req, res, next) {
   res.json({ anns: anns });
-})
+})*/
 
 
 app.get('/current', function (req, res, next) {
