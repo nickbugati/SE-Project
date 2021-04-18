@@ -69,7 +69,9 @@
             $.post("https://wece-makers-garage-management.herokuapp.com/officer", { officer: officer }, function (data) {
                 if (data) {
                     addOption(officer);
+                    addOption2(officer);
                     alert("Officer Added");
+                    location.reload();
                 }
             });
         });
@@ -87,7 +89,8 @@
             console.log(data);
             var newOption;
             officers.forEach(element => {
-                addOption(element.name);
+                addOption1(element.name);
+                addOption2(element.name);
             });
         });    
     });
@@ -97,7 +100,7 @@
         var d_officer;
         var officerId;
         $("#officer_delete").click(function () {
-            d_officer = $("#d_officer").val();
+            d_officer = $("#d_input").val();
 
             officers.forEach(element => {
                 if (d_officer == element.name)
@@ -186,7 +189,9 @@
         <br>
         <label for="delete_officer">Remove officer: </label>
 
-        <textarea id="d_officer" name="d_officer" rows="1" cols="50"> </textarea>
+        <select name="d_input" id="d_input">
+            <div id="blank" value=""> </div>
+        </select>
         <br>
         <button type="button" id="officer_delete" style="width:100px;height:30px"> Delete </button>
 
@@ -200,7 +205,7 @@
 
         <label for="input">Select Current Supervisor:</label>
         <select name="input" id="input" onchange="setSupervisor()">
-            <option id="blank" value=""> </option>
+            <div id="blank" value=""> </div>
         </select>
 
         <br>
