@@ -30,11 +30,18 @@ function setOcc() {
 
 }
 
-function addOption(name) {
+function addOption1(name) {
     newOption = document.createElement('option');
     newOption.innerHTML = name;
     newOption.value = name;
     document.getElementById("input").insertAdjacentElement('beforeend', newOption)
+}
+
+function addOption2(name) {
+    newOption = document.createElement('option');
+    newOption.innerHTML = name;
+    newOption.value = name;
+    document.getElementById("d_input").insertAdjacentElement('beforeend', newOption)
 }
 
 
