@@ -98,7 +98,7 @@ app.post('/numChange', (req, res) => {
 
 app.post('/announcement', (req, res) => {
   announ = req.body.ann;
-  anns.push(String(announ));
+  //anns.push(String(announ));
   console.log("announ = " + announ);
   res.end("yes");
 });
