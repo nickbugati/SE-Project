@@ -68,7 +68,7 @@
             console.log(officer);
             $.post("https://wece-makers-garage-management.herokuapp.com/officer", { officer: officer }, function (data) {
                 if (data) {
-                    addOption(officer);
+                    addOption1(officer);
                     addOption2(officer);
                     alert("Officer Added");
                     location.reload();
