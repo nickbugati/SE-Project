@@ -151,3 +151,4 @@ app.get('/login', requiresAuth(), (req, res) => {
 app.use('/home/', express.static(public));
 app.use('/admin/', express.static(public));
 app.use('/location/', express.static(public));
+app.use('/about/', express.static(public));
