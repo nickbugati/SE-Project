@@ -84,6 +84,11 @@ app.get('/admin/', (req, res) => {
   res.sendFile(path.join(public, '/admin.html'))
 
 });
+app.get('/about/', (req, res) => {
+
+  res.sendFile(path.join(public, '/about.html'))
+
+});
 
 
 
