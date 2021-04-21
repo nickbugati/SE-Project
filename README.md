@@ -18,7 +18,7 @@ There are 4 tabs on the website:
 - About
 - Admin Management
 
-All pages are accessible to anyone expect the Admin Management Page
+All pages are accessible to anyone except the Admin Management Page
 
 - The Home page will list all the live information regarding the garage such as occupancy, announcements, officer in the garage, and open hours
 - The Location page will show the location of the Maker's Garage on campus
@@ -29,6 +29,9 @@ The Admin Management page requires a log-in to an admin account to access the pa
 
 Technical Details
 -----------------
+
+Our project was built using Node.js and Express.js for the server, and the frontend being the standard HTML, CSS, and Javascript, particularly
+jQuery/Ajax for handling HTTP requests.
 
 We used MongoDB to store Officer's information to a cloud database.
 We used a seperate database associated with Auth0 to store log-in credentials.
