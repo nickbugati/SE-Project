@@ -1,5 +1,5 @@
 // Officer model and officer router were built following this guide by Devistry:
-// https://www.youtube.com/watch?v=scYojqjnHzI&list=PLJM1tXwlGdaf57oUx0rIqSW668Rpo_7oU&index=1
+// https://www.youtube.com/watch?v=scYojqjnHzI&list=PLJM1tXwlGdaf57oUx0rIqSW668Rpo_7oU&index=3
 //
 const mongoose = require("mongoose");
 
